@@ -2,6 +2,7 @@ package com.example.ui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -231,6 +232,7 @@ fun FruitXpressApp() {
                         "cart" -> {
                             CartScreen(
                                 cartItems = cartItems,
+                                currentUser = currentUser,
                                 selectedAddress = selectedAddress,
                                 servicedPinCodes = storeSettings?.servicedPinCodes ?: "121001, 121002, 121003, 121004, 121005, 121006, 121007, 121008",
                                 onIncrement = { pid -> coroutineScope.launch { repository.addToCart(pid, 1) } },
@@ -368,28 +370,35 @@ fun FruitXpressApp() {
 
                     Text(
                         text = "Order Placed Successfully!",
-                        fontSize = 18.sp,
+                        fontSize = 20.sp,
                         fontWeight = FontWeight.ExtraBold,
-                        color = Color(0xFF1E281F)
-                    )
-
-                    Spacer(modifier = Modifier.height(6.dp))
-
-                    Text(
-                        text = "Order ID: $orderId",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = FruitOrange
+                        color = Color(0xFF111827)
                     )
 
                     Spacer(modifier = Modifier.height(8.dp))
 
+                    Surface(
+                        color = Color(0xFFFFF7ED),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, Color(0xFFFED7AA))
+                    ) {
+                        Text(
+                            text = "Order ID: $orderId",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = FruitOrange,
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
                     Text(
-                        text = "Thank you for shopping with Fruit Xpress! Your fresh items are being packed at our Faridabad hub.",
-                        fontSize = 12.sp,
-                        color = Color.Gray,
+                        text = "Thank you for shopping with Fruit Xpress! Your farm-fresh items are being packed at our Faridabad hub and will reach your doorstep on schedule.",
+                        fontSize = 14.sp,
+                        color = Color(0xFF374151),
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                        lineHeight = 16.sp
+                        lineHeight = 20.sp
                     )
 
                     Spacer(modifier = Modifier.height(20.dp))
