@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FruitXpressFirestoreBlueprint",
+  "description": "Schema and security blueprint for Fruit Xpress grocery delivery platform",
+  "collections": {
+    "users": {
+      "path": "users/{userId}",
+      "description": "User profile with role-based access (CUSTOMER, ADMIN, RIDER)",
+      "fields": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["CUSTOMER", "ADMIN", "RIDER"] },
+        "createdAt": { "type": "timestamp" }
+      }
+    },
+    "addresses": {
+      "path": "users/{userId}/addresses/{addressId}",
+      "description": "Customer saved delivery addresses in Faridabad",
+      "fields": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "houseFlatNo": { "type": "string" },
+        "buildingStreet": { "type": "string" },
+        "locality": { "type": "string" },
+        "sector": { "type": "string" },
+        "city": { "type": "string" },
+        "pinCode": { "type": "string" },
+        "landmark": { "type": "string" }
+      }
+    },
+    "products": {
+      "path": "products/{productId}",
+      "description": "Produce catalog items managed by Admin",
+      "fields": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "hindiName": { "type": "string" },
+        "category": { "type": "string" },
+        "unit": { "type": "string" },
+        "purchaseCost": { "type": "number" },
+        "sellingPrice": { "type": "number" },
+        "mrp": { "type": "number" },
+        "stock": { "type": "integer" },
+        "isActive": { "type": "boolean" },
+        "isFeatured": { "type": "boolean" }
+      }
+    },
+    "orders": {
+      "path": "orders/{orderId}",
+      "description": "Customer orders with atomic server validation & status flow",
+      "fields": {
+        "orderId": { "type": "string" },
+        "userId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "deliveryAddress": { "type": "string" },
+        "deliveryPinCode": { "type": "string" },
+        "deliverySlot": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "deliveryFee": { "type": "number" },
+        "discount": { "type": "number" },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "paymentStatus": { "type": "string", "enum": ["PENDING", "PAID"] },
+        "status": { "type": "string", "enum": ["PLACED", "ACCEPTED", "PACKED", "OUT_FOR_DELIVERY", "DELIVERED", "CANCELLED"] },
+        "assignedRiderId": { "type": "string" },
+        "codCollected": { "type": "boolean" },
+        "placedAt": { "type": "timestamp" },
+        "idempotencyKey": { "type": "string" }
+      }
+    },
+    "storeSettings": {
+      "path": "storeSettings/{settingsId}",
+      "description": "Store configuration (Faridabad PINs, fees, min order)",
+      "fields": {
+        "operatingCity": { "type": "string" },
+        "servicedPinCodes": { "type": "string" },
+        "freeDeliveryThreshold": { "type": "number" },
+        "deliveryFee": { "type": "number" },
+        "minOrderValue": { "type": "number" },
+        "isStoreOpen": { "type": "boolean" }
+      }
+    }
+  }
+}

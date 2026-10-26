@@ -1,0 +1,6 @@
+{
+  "name": "Fruit Xpress",
+  "description": "Complete grocery ordering and delivery platform for Fruit Xpress in Faridabad.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
